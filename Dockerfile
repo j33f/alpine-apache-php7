@@ -1,5 +1,5 @@
 FROM alpine:edge
-MAINTAINER Paul Smith <pa.ulsmith.net>
+MAINTAINER Jean-François Vial <jeff@modulaweb.fr>
 
 # Add repos
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
