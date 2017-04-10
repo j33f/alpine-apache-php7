@@ -59,20 +59,13 @@ echo 'xdebug.remote_connect_back=1' >> /etc/php7/php.ini;
 echo 'xdebug.remote_log=/tmp/xdebug.log' >> /etc/php7/php.ini;
 echo 'xdebug.remote_autostart=true' >> /etc/php7/php.ini;
 
-# enable apcu
-# Install apcu
-pecl channel-update pecl.php.net
-pecl install APCu
-echo "extension=apcu.so" >> /etc/php7/php.ini;
+# apcu is no longuer needed => better use redis
 
 # Start (ensure apache2 PID not left behind first) to stop auto start crashes if didn't shut down properly
 
 echo "Clearing any old processes..."
 rm -f /run/apache2/apache2.pid
 rm -f /run/apache2/httpd.pid
-
-# debug
-cat /etc/apache2/httpd.conf
 
 echo "Starting apache..."
 httpd -D FOREGROUND
