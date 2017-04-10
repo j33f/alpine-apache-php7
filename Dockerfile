@@ -41,13 +41,10 @@ RUN apk add \
 	php7-redis \
 	php7-opcache \
 	php7-uuid \
-	php7-dev \
+	php7-pecl \
+	&& rm /usr/bin/php \
 	&& ln -s /usr/bin/php7 /usr/bin/php \
     && rm -f /var/cache/apk/*
-
-# Install apcu
-pecl channel-update pecl.php.net
-pecl install apcu
 
 # Add apache to run and configure
 RUN mkdir /run/apache2 \

@@ -60,6 +60,9 @@ echo 'xdebug.remote_log=/tmp/xdebug.log' >> /etc/php7/php.ini;
 echo 'xdebug.remote_autostart=true' >> /etc/php7/php.ini;
 
 # enable apcu
+# Install apcu
+pecl channel-update pecl.php.net
+pecl install apcu
 echo "extension=apcu.so" >> /etc/php7/php.ini;
 
 # Start (ensure apache2 PID not left behind first) to stop auto start crashes if didn't shut down properly
