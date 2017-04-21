@@ -22,6 +22,7 @@ RUN apk add \
 	php7-dom \
 	php7-pdo \
 	php7-zip \
+	php7-zlib \
 	php7-mysqli \
 	php7-sqlite3 \
 	php7-pdo_pgsql \
@@ -47,19 +48,11 @@ RUN apk add \
     && rm -f /var/cache/apk/*
 
 # Add apache to run and configure
-RUN mkdir /run/apache2 \
-    && sed -i "s/#LoadModule\ rewrite_module/LoadModule\ rewrite_module/" /etc/apache2/httpd.conf \
-    && sed -i "s/#LoadModule\ session_module/LoadModule\ session_module/" /etc/apache2/httpd.conf \
-    && sed -i "s/#LoadModule\ session_cookie_module/LoadModule\ session_cookie_module/" /etc/apache2/httpd.conf \
-    && sed -i "s/#LoadModule\ session_crypto_module/LoadModule\ session_crypto_module/" /etc/apache2/httpd.conf \
-    && sed -i "s/#LoadModule\ deflate_module/LoadModule\ deflate_module/" /etc/apache2/httpd.conf \
-    && sed -i "s#^DocumentRoot \".*#DocumentRoot \"/app/public\"#g" /etc/apache2/httpd.conf \
-    && sed -i "s#/var/www/localhost/htdocs#/app/public#" /etc/apache2/httpd.conf \
-    && printf "\n<Directory \"/app/public\">\n\tAllowOverride All\n</Directory>\n" >> /etc/apache2/httpd.conf
+RUN mkdir /run/apache2
 
-RUN mkdir /app && mkdir /app/public && chown -R apache:apache /app && chmod -R 755 /app && mkdir bootstrap
+RUN mkdir /app && chown -R apache:apache /app && chmod -R 755 /app && mkdir bootstrap
 ADD start.sh /bootstrap/
 RUN chmod +x /bootstrap/start.sh
 
-EXPOSE 80
+EXPOSE 8080
 ENTRYPOINT ["/bootstrap/start.sh"]
