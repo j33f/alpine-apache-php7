@@ -46,6 +46,7 @@ RUN apk add \
 # Add apache to run and configure + start script
 RUN mkdir /run/apache2 && mkdir /bootstrap
 COPY start.sh /bootstrap/start.sh
+COPY www.conf /etc/php7/php-fpm.d/www.conf
 RUN mkdir /app && chown -R apache:apache /app && chmod -R 755 /app  && chmod +x /bootstrap/start.sh
 
 EXPOSE 8080
