@@ -71,7 +71,7 @@ rm -f /run/apache2/apache2.pid
 rm -f /run/apache2/httpd.pid
 
 echo "Starting php-fpm"
-php-fpm7 -F
+php-fpm7 -D
 
 echo "Starting apache..."
 httpd -D FOREGROUND
