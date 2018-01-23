@@ -59,6 +59,9 @@ echo 'xdebug.remote_connect_back=1' >> /etc/php7/php.ini;
 echo 'xdebug.remote_log=/tmp/xdebug.log' >> /etc/php7/php.ini;
 echo 'xdebug.remote_autostart=true' >> /etc/php7/php.ini;
 
+# configure slotmem
+echo 'LoadModule slotmem_shm_module modules/mod_slotmem_shm.so' > /etc/apache2/conf.d/slotmem_shm.conf;
+
 # apcu is no longuer needed => better use redis
 
 # Start (ensure apache2 PID not left behind first) to stop auto start crashes if didn't shut down properly
@@ -66,6 +69,9 @@ echo 'xdebug.remote_autostart=true' >> /etc/php7/php.ini;
 echo "Clearing any old processes..."
 rm -f /run/apache2/apache2.pid
 rm -f /run/apache2/httpd.pid
+
+echo "Starting php-fpm"
+php-fpm7 -F
 
 echo "Starting apache..."
 httpd -D FOREGROUND
