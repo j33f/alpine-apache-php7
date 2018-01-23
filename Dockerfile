@@ -8,9 +8,6 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
 RUN apk update && apk upgrade && apk add \
 	bash apache2 php7-apache2 curl ca-certificates git php7 php7-phar php7-json php7-iconv php7-openssl
 
-# Add Composer
-RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
-
 # Setup apache and php
 RUN apk add \
 	php7-ftp \
@@ -42,7 +39,6 @@ RUN apk add \
 	php7-redis \
 	php7-opcache \
 	php7-uuid \
-	php7-pecl \
 	&& rm /usr/bin/php \
 	&& ln -s /usr/bin/php7 /usr/bin/php \
     && rm -f /var/cache/apk/*
