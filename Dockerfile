@@ -39,6 +39,8 @@ RUN apk add \
 	php7-redis \
 	php7-opcache \
 	php7-uuid \
+	php7-xml \
+	php7-simplexml \
 	&& rm /usr/bin/php \
 	&& ln -s /usr/bin/php7 /usr/bin/php \
     && rm -f /var/cache/apk/*
