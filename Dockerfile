@@ -46,7 +46,7 @@ RUN apk add \
     && rm -f /var/cache/apk/*
 
 # Add apache to run and configure
-RUN mkdir /run/apache2
+RUN mkdir -p /run/apache2
 
 RUN mkdir /app && chown -R apache:apache /app && chmod -R 755 /app && mkdir bootstrap
 ADD start.sh /bootstrap/
